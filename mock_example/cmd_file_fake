@@ -1,0 +1,36 @@
+<task> 1
+  <cmd>	CMD_SYNCHROTRON	
+
+  <max_subpixel_lvl> 0
+
+  <path_grid>      "cut_fake_16.dat"
+  <path_out>       "./results/fake_16/"
+  
+  #plot the input grid as fits as a sanity ckeck
+  #<write_inp_midplanes> 16
+  #<write_3d_midplanes> 1     # 1->xy 2->xz 3->yz
+  
+  #convesion into SI
+  <conv_dens>     1e6 #cm^-3 in m^-3		
+  <mu>		      1.4		
+  
+  #assuming the side length of the cube is pm 1pc  6.171e+16
+  <conv_len>      1.5e+20 # the code assumes this is half the side length of 32 kpc
+  <conv_mag>      1e-4 # G in T
+  #<conv_vel>      0.01
+  #<mass_fraction> 0.01
+
+  <nr_threads>  -1
+  
+  #rotation axis 100 is x axis, 001 is y axis, 010 is z axis
+  <axis1> 1 0 0
+  <axis2> 0 1 0
+
+  #detectors at 6 cm rotated arround each of the ax1 and ax2  axis
+  # detector number of pixels lamda_min lambda_max number_of_wavelenghts no_bgr_source=1 angle_axis1 angle_axis2
+ # for healpix last 3 are: r_x, r_y, r_z in meters
+  <detector_sync nr_pixel = "16">	29.9	29.9	1	1	0.0	0.0	6.0e+22
+  <detector_sync nr_pixel = "16">	29.9	29.9	1	1	0.0	90.0	6.0e+22
+  <detector_sync nr_pixel = "16">	29.9	29.9	1	1	90.0	0.0	6.0e+22
+  <detector_sync nr_pixel = "16">	29.9	29.9	1	1	90.0	0.0	6.0e+22
+</task> 

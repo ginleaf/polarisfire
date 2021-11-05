@@ -1,0 +1,6 @@
+Mock example: follow instructions to create a cube with constant B field along one axis and constant CR density and run POLARIS on it.
+
+1. python3.6 make_mock_cube.py
+2. python3.6 converter_octree_fakecube.py
+3. finally, run polaris: ../../polaris/bin/polaris cmd_file_fake
+4. Plot results using plot_mock.py

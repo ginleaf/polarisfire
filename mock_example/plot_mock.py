@@ -17,59 +17,154 @@ from astropy.io import fits
 
 
 
-# Plot polaris output
 
-folder = '/home/gin/projects/FIRE/POLARIS/polaris/projects/results/fake_16/data/'
-os.chdir(folder)
 
 #%%
+
+# Plot polaris output
+savedir = '/home/gin/projects/FIRE/POLARIS/polarisfire/mock_example/results/fake_16/'
+folder = savedir+'data/'
+
+os.chdir(folder)
 
 # structure of file is :'I Q U V null Nth I Q U V lambda^2xkappa Ncr'
 
 hdu = fits.open(folder+'polaris_detector_nr0001.fits')
 dat2 = hdu[0].data[0][0]
-plt.imshow(dat2,origin='lower',norm =LogNorm())
-plt.colorbar()
+plt.figure(figsize=(5,6))
+plt.imshow(dat2,origin='lower', cmap = 'Blues')
+plt.colorbar(fraction=0.046, pad=0.1,orientation='horizontal')
+plt.title('Stokes I')
+plt.savefig(savedir+'plots/I_d01.png')
 plt.show()
 
-print dat2[0][0], 'Jy/pix'
+print(dat2[0][0], 'Jy/pix')
 
 # Angle of pixel
 pix_ang = hdu[0].header['CDELT1A'] #deg
-print 'Pix size', pix_ang, hdu[0].header['CUNIT1A']
+print('Pix size', pix_ang, hdu[0].header['CUNIT1A'])
 
 hdu = fits.open(folder+'polaris_detector_nr0002.fits')
 dat2 = hdu[0].data[0][0]
-plt.imshow(dat2,origin='lower',norm =LogNorm())
-plt.colorbar()
+plt.figure(figsize=(5,6))
+plt.imshow(dat2,origin='lower', cmap = 'Blues')
+plt.colorbar(fraction=0.046, pad=0.1,orientation='horizontal')
+plt.title('Stokes I')
+plt.savefig(savedir+'plots/I_d02.png')
 plt.show()
 
-print dat2[0][0], 'Jy/pix'
+print(dat2[0][0], 'Jy/pix')
 
 hdu = fits.open(folder+'polaris_detector_nr0003.fits')
 dat2 = hdu[0].data[0][0]
-plt.imshow(dat2,origin='lower',norm =LogNorm())
-plt.colorbar()
+plt.figure(figsize=(5,6))
+plt.imshow(dat2,origin='lower', cmap = 'Blues')
+plt.colorbar(fraction=0.046, pad=0.1,orientation='horizontal')
+plt.title('Stokes I')
+plt.savefig(savedir+'plots/I_d03.png')
 plt.show()
 
-print dat2[0][0], 'Jy/pix'
-
-
-dat2 = hdu[0].data[2][0]
-plt.imshow(np.abs(dat2),origin='lower',norm =LogNorm())
-plt.title('U')
-if dat2.min()!=0:
-    plt.colorbar()
-plt.show()
-
-print 'U', dat2[0][0], 'Jy/pix'
-dat2 = hdu[0].data[1][0]
-print 'Q', dat2[0][0], 'Jy/pix'
+print(dat2[0][0], 'Jy/pix')
 
 hdu = fits.open(folder+'polaris_detector_nr0004.fits')
 dat2 = hdu[0].data[0][0]
+plt.figure(figsize=(5,6))
+plt.imshow(dat2,origin='lower', cmap = 'Blues')
+plt.colorbar(fraction=0.046, pad=0.1,orientation='horizontal')
+plt.title('Stokes I')
+plt.savefig(savedir+'plots/I_d04.png')
+plt.show()
 
-print dat2[0][0], 'Jy/pix'
+print(dat2[0][0], 'Jy/pix')
+
+print('-----Stokes QU------')
+
+print('1st detector')
+# QU
+hdu = fits.open(folder+'polaris_detector_nr0001.fits')
+dat2 = hdu[0].data[2][0]
+plt.figure(figsize=(5,6))
+plt.imshow(dat2,origin='lower', cmap = 'Blues')
+if dat2.mean()!=0:
+    plt.colorbar(fraction=0.046, pad=0.1,orientation='horizontal')
+plt.title('U')
+plt.savefig(savedir+'plots/U_d01.png')
+plt.show()
+print('U', dat2.min(), dat2.max(), 'Jy/pix')
+dat2 = hdu[0].data[1][0]
+plt.figure(figsize=(5,6))
+plt.imshow(dat2,origin='lower', cmap = 'Blues')
+if dat2.mean()!=0:
+    plt.colorbar(fraction=0.046, pad=0.1,orientation='horizontal')
+plt.title('Q')
+plt.savefig(savedir+'plots/Q_d01.png')
+plt.show()
+print('Q', dat2.min(), np.max(dat2), 'Jy/pix')
+
+print('2nd detector')
+hdu = fits.open(folder+'polaris_detector_nr0002.fits')
+dat2 = hdu[0].data[2][0]
+plt.figure(figsize=(5,6))
+plt.imshow(dat2,origin='lower', cmap = 'Blues')
+if dat2.mean()!=0:
+    plt.colorbar(fraction=0.046, pad=0.1,orientation='horizontal')
+plt.title('U')
+plt.savefig(savedir+'plots/U_d02.png')
+plt.show()
+print('U', dat2.min(), dat2.max(), 'Jy/pix')
+dat2 = hdu[0].data[1][0]
+plt.figure(figsize=(5,6))
+plt.imshow(dat2,origin='lower', cmap = 'Blues')
+if dat2.mean()!=0:
+    plt.colorbar(fraction=0.046, pad=0.1,orientation='horizontal')
+plt.title('Q')
+plt.savefig(savedir+'plots/Q_d02.png')
+plt.show()
+print('Q', dat2.min(), np.max(dat2), 'Jy/pix')
+
+
+print('3rd detector')
+hdu = fits.open(folder+'polaris_detector_nr0003.fits')
+dat2 = hdu[0].data[2][0]
+plt.figure(figsize=(5,6))
+plt.imshow(dat2,origin='lower', cmap = 'Blues')
+if dat2.mean()!=0:
+    plt.colorbar(fraction=0.046, pad=0.1,orientation='horizontal')
+plt.title('U')
+plt.savefig(savedir+'plots/U_d03.png')
+plt.show()
+print('U', dat2.min(), dat2.max(), 'Jy/pix')
+dat2 = hdu[0].data[1][0]
+plt.figure(figsize=(5,6))
+plt.imshow(dat2,origin='lower', cmap = 'Blues')
+if dat2.mean()!=0:
+    plt.colorbar(fraction=0.046, pad=0.1,orientation='horizontal')
+plt.title('Q')
+plt.savefig(savedir+'plots/Q_d03.png')
+plt.show()
+print('Q', dat2.min(), np.max(dat2), 'Jy/pix')
+
+
+print('4rd detector')
+hdu = fits.open(folder+'polaris_detector_nr0004.fits')
+dat2 = hdu[0].data[2][0]
+plt.figure(figsize=(5,6))
+plt.imshow(dat2,origin='lower', cmap = 'Blues')
+if dat2.mean()!=0:
+    plt.colorbar(fraction=0.046, pad=0.1,orientation='horizontal')
+plt.title('U')
+plt.savefig(savedir+'plots/U_d04.png')
+plt.show()
+print('U', dat2.min(), dat2.max(), 'Jy/pix')
+dat2 = hdu[0].data[1][0]
+plt.figure(figsize=(5,6))
+plt.imshow(dat2,origin='lower', cmap = 'Blues')
+if dat2.mean()!=0:
+    plt.colorbar(fraction=0.046, pad=0.1,orientation='horizontal')
+plt.title('Q')
+plt.savefig(savedir+'plots/Q_d04.png')
+plt.show()
+print('Q', dat2.min(), np.max(dat2), 'Jy/pix')
 
 wavelength =  hdu[0].header['HIERARCH WAVELENGTH1']
 frequency = 2.99e8/wavelength/1e6#m/s/m -> MHz

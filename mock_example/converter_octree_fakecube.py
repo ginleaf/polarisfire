@@ -255,16 +255,16 @@ if __name__ == "__main__":
                 c_y = iy-pos_min+pos_off
                 c_z = iz-pos_min+pos_off
                 
-                dens = data_dens[ix,iy,iz]
+                dens = data_dens[iy,ix,iz]#[ix,iy,iz]
                 
                 #Tgas=data_temp[iz,iy,ix]
                 
-                magx = data_magx[ix,iy,iz]
-                magy = data_magy[ix,iy,iz]
-                magz = data_magz[ix,iy,iz]
+                magx = data_magx[iy,ix,iz]#[ix,iy,iz]
+                magy = data_magy[iy,ix,iz]#[ix,iy,iz]
+                magz = data_magz[iy,ix,iz]#[ix,iy,iz]
                 
-                n_th = data_n_th[ix,iy,iz]
-                n_CR = data_n_CRe[ix,iy,iz]
+                n_th = data_n_th[iy,ix,iz]#[ix,iy,iz]
+                n_CR = data_n_CRe[iy,ix,iz]#[ix,iy,iz]
                 
                 g_min = 2
                 g_max = 1000

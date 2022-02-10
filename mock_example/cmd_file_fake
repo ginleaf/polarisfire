@@ -22,7 +22,7 @@
 
   <nr_threads>  -1
   
-  #rotation axis 100 is x axis, 001 is y axis, 010 is z axis
+  #rotation axis 100 is x axis, 001 is z axis, 010 is y axis (manual has typo)
   <axis1> 1 0 0
   <axis2> 0 1 0
 
@@ -32,5 +32,5 @@
   <detector_sync nr_pixel = "16">	29.9	29.9	1	1	0.0	0.0	6.0e+22
   <detector_sync nr_pixel = "16">	29.9	29.9	1	1	0.0	90.0	6.0e+22
   <detector_sync nr_pixel = "16">	29.9	29.9	1	1	90.0	0.0	6.0e+22
-  <detector_sync nr_pixel = "16">	29.9	29.9	1	1	90.0	0.0	6.0e+22
+  <detector_sync nr_pixel = "16">	29.9	29.9	1	1	90.0	90.0	6.0e+22
 </task> 

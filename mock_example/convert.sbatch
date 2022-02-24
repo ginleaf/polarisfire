@@ -6,5 +6,5 @@
 #SBATCH --mail-user=panopg@caltech.edu
 #SBATCH -t 72:00:00
 
-python3.7 converter_octree_fakecube.py
+python3.7 converter_octree_fakecubeyt.py
 

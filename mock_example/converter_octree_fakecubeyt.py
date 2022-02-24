@@ -5,8 +5,8 @@ import h5py
 import os
 #%%
 
-path_input = "mock_cube_yt.hdf5_cut32_r16.hdf5"
-path_output = "mock_cube_yt_cut32_r16.dat"
+path_input = "mock_cube_yt.hdf5"
+path_output = "mock_cube_yt.dat"
 
 # data IDs for the POLARIS header
 grid_id = 20  # grid ID (20 = octree)  
@@ -15,6 +15,8 @@ data_ids = [0, 4, 5, 6, 22, 24, 25, 26, 27]
 
 def loadData(path):  
     f = h5py.File(path)
+
+    print(f.keys())
     
     magx = f['magnetic_field_x'][:] # this is in G
     magy = f['magnetic_field_y'][:] # this is in G
@@ -22,7 +24,7 @@ def loadData(path):
     dens = f['H_nuclei_density'][:] # this is particles/cm^3
     #temp = f['temperature'][:]
     #massdens = f['density'][:]
-    n_th = f['n_th'][:]
+    n_th = f['n_e'][:]
     # Electron abundance
     #electron_abundance = f['ElectronAbundance'][:]
     # Compute thermal electron volume density
@@ -39,7 +41,7 @@ def loadData(path):
     #p_to_e_ratio = 50./1
     #n_CRe = n_CRp/p_to_e_ratio
     
-    n_CRe = f['n_CRE'][:]
+    n_CRe = f['n_cre'][:]
     f.close()
     
     dim=dens.shape[0]
@@ -255,16 +257,16 @@ if __name__ == "__main__":
                 c_y = iy-pos_min+pos_off
                 c_z = iz-pos_min+pos_off
                 
-                dens = data_dens[iy,ix,iz]#[ix,iy,iz]
+                dens = data_dens[ix,iy,iz]#[iy,ix,iz]#
                 
-                #Tgas=data_temp[iz,iy,ix]
+                #Tgas=data_temp[ix,iy,iz]
                 
-                magx = data_magx[iy,ix,iz]#[ix,iy,iz]
-                magy = data_magy[iy,ix,iz]#[ix,iy,iz]
-                magz = data_magz[iy,ix,iz]#[ix,iy,iz]
+                magx = data_magx[ix,iy,iz]
+                magy = data_magy[ix,iy,iz]
+                magz = data_magz[ix,iy,iz]
                 
-                n_th = data_n_th[iy,ix,iz]#[ix,iy,iz]
-                n_CR = data_n_CRe[iy,ix,iz]#[ix,iy,iz]
+                n_th = data_n_th[ix,iy,iz]
+                n_CR = data_n_CRe[ix,iy,iz]
                 
                 g_min = 2
                 g_max = 1000

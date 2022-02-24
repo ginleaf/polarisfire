@@ -5,8 +5,8 @@ import h5py
 import os
 #%%
 
-path_input = "mock_cube_yt.hdf5_cut32_r16.hdf5"
-path_output = "mock_cube_yt_cut32_r16.dat"
+path_input = "../../m12i_cr700/snapshot_600.0.hdf5_cut32_r10.hdf5"
+path_output = "../../m12i_cr700/snapshot_600.0.hdf5_cut32_r10.dat"
 
 # data IDs for the POLARIS header
 grid_id = 20  # grid ID (20 = octree)  
@@ -15,31 +15,33 @@ data_ids = [0, 4, 5, 6, 22, 24, 25, 26, 27]
 
 def loadData(path):  
     f = h5py.File(path)
+
+    print(f.keys())
     
     magx = f['magnetic_field_x'][:] # this is in G
     magy = f['magnetic_field_y'][:] # this is in G
     magz =  f['magnetic_field_z'][:] # this is in G, no need to swap z coordinate it is already in the right place for numpy
     dens = f['H_nuclei_density'][:] # this is particles/cm^3
     #temp = f['temperature'][:]
-    #massdens = f['density'][:]
-    n_th = f['n_th'][:]
+    massdens = f['Density'][:]
+    #n_th = f['n_e'][:]
     # Electron abundance
-    #electron_abundance = f['ElectronAbundance'][:]
+    electron_abundance = f['ElectronAbundance'][:]
     # Compute thermal electron volume density
-    #n_th = dens*electron_abundance
+    n_th = dens*electron_abundance
 
     # Load CR energy
-    #CR_spec_energy = f['CosmicRayEnergy'][:] # this is specific energy (erg/g) 
-    #GeV_to_erg = 1.602e-19 * 10**7 * 10**9 # erg - these are 1 GeV protons
-    #CR_energy_density = CR_spec_energy*massdens # erg/cm^-3
+    CR_spec_energy = f['CosmicRayEnergy'][:] # this is specific energy (erg/g) 
+    GeV_to_erg = 1.602e-19 * 10**7 * 10**9 # erg - these are 1 GeV protons
+    CR_energy_density = CR_spec_energy*massdens # erg/cm^-3
     # CR proton volume density
-    #n_CRp = CR_energy_density/GeV_to_erg #", units="erg/cm**3", sampling_type="cell")
+    n_CRp = CR_energy_density/GeV_to_erg #", units="erg/cm**3", sampling_type="cell")
     # Compute CR electrons
     # assume proton-to-electron ratio    
-    #p_to_e_ratio = 50./1
-    #n_CRe = n_CRp/p_to_e_ratio
+    p_to_e_ratio = 50./1
+    n_CRe = n_CRp/p_to_e_ratio
     
-    n_CRe = f['n_CRE'][:]
+    #n_CRe = f['n_cre'][:]
     f.close()
     
     dim=dens.shape[0]
@@ -255,16 +257,16 @@ if __name__ == "__main__":
                 c_y = iy-pos_min+pos_off
                 c_z = iz-pos_min+pos_off
                 
-                dens = data_dens[iy,ix,iz]#[ix,iy,iz]
+                dens = data_dens[ix,iy,iz]#[iy,ix,iz]#
                 
-                #Tgas=data_temp[iz,iy,ix]
+                #Tgas=data_temp[ix,iy,iz]
                 
-                magx = data_magx[iy,ix,iz]#[ix,iy,iz]
-                magy = data_magy[iy,ix,iz]#[ix,iy,iz]
-                magz = data_magz[iy,ix,iz]#[ix,iy,iz]
+                magx = data_magx[ix,iy,iz]
+                magy = data_magy[ix,iy,iz]
+                magz = data_magz[ix,iy,iz]
                 
-                n_th = data_n_th[iy,ix,iz]#[ix,iy,iz]
-                n_CR = data_n_CRe[iy,ix,iz]#[ix,iy,iz]
+                n_th = data_n_th[ix,iy,iz]
+                n_CR = data_n_CRe[ix,iy,iz]
                 
                 g_min = 2
                 g_max = 1000

@@ -5,41 +5,45 @@ import h5py
 import os
 #%%
 
-path_input = "mock_cube_yt.hdf5_cut32_r16.hdf5"
-path_output = "mock_cube_yt_cut32_r16.dat"
+Npix = 64
+radius = 10
+#path_input = "/home/gin/projects/FIRE/POLARIS/cut_256.hdf5"
+#path_output = "/home/gin/projects/FIRE/POLARIS/octree_256.dat"
+path_input = "/panfs/ds09/hopkins/panopg/snapshots/m12i/cr_700/snapshot_600.0.hdf5_cut%d_r%d.hdf5"%(Npix,radius)
+path_output = "/panfs/ds09/hopkins/panopg/octrees/m12i_cr_700/snapshot_600.0.hdf5_cut%d_r%d.hdf5"%(Npix,radius)
 
 # data IDs for the POLARIS header
 grid_id = 20  # grid ID (20 = octree)  
 # grid header see manual table 3.3
+#data_ids = [0, 3, 4, 5, 6, 22, 24, 25, 26, 27]
 data_ids = [0, 4, 5, 6, 22, 24, 25, 26, 27]
 
 def loadData(path):  
     f = h5py.File(path)
+    print('fields:', f.keys())
+
     
     magx = f['magnetic_field_x'][:] # this is in G
     magy = f['magnetic_field_y'][:] # this is in G
     magz =  f['magnetic_field_z'][:] # this is in G, no need to swap z coordinate it is already in the right place for numpy
     dens = f['H_nuclei_density'][:] # this is particles/cm^3
     #temp = f['temperature'][:]
-    #massdens = f['density'][:]
-    n_th = f['n_th'][:]
-    # Electron abundance
-    #electron_abundance = f['ElectronAbundance'][:]
-    # Compute thermal electron volume density
-    #n_th = dens*electron_abundance
+    massdens = f['Density'][:]
 
+    # Electron abundance
+    electron_abundance = f['ElectronAbundance'][:]
+    # Compute thermal electron volume density
+    n_th = dens*electron_abundance
     # Load CR energy
-    #CR_spec_energy = f['CosmicRayEnergy'][:] # this is specific energy (erg/g) 
-    #GeV_to_erg = 1.602e-19 * 10**7 * 10**9 # erg - these are 1 GeV protons
-    #CR_energy_density = CR_spec_energy*massdens # erg/cm^-3
+    CR_spec_energy = f['CosmicRayEnergy'][:] # this is specific energy (erg/g) 
+    GeV_to_erg = 1.602e-19 * 10**7 * 10**9 # erg - these are 1 GeV protons
+    CR_energy_density = CR_spec_energy*massdens # erg/cm^-3
     # CR proton volume density
-    #n_CRp = CR_energy_density/GeV_to_erg #", units="erg/cm**3", sampling_type="cell")
+    n_CRp = CR_energy_density/GeV_to_erg #", units="erg/cm**3", sampling_type="cell")
     # Compute CR electrons
     # assume proton-to-electron ratio    
-    #p_to_e_ratio = 50./1
-    #n_CRe = n_CRp/p_to_e_ratio
-    
-    n_CRe = f['n_CRE'][:]
+    p_to_e_ratio = 50./1
+    n_CRe = n_CRp/p_to_e_ratio
     f.close()
     
     dim=dens.shape[0]
@@ -53,7 +57,7 @@ def loadData(path):
     print("By      (min,max):", magy.min(),"-", magy.max(), "Guass")
     print("Bz      (min,max):", magz.min(),"-", magz.max(), "Guass")
 
-    return dim, dens, n_CRe, n_th, magx, magy, magz #  temp,
+    return dim, dens, n_th, n_CRe, magx, magy, magz
 
 
 CLR_LINE = "                                                                  \r"
@@ -222,9 +226,8 @@ if __name__ == "__main__":
     print("Loading data from: \n", path_input, "\n")
     
     #,data_velx,data_vely,data_velz
-    #dim, data_dens, data_n_th, data_n_CRe, data_temp, data_magx, data_magy, data_magz = loadData(path_input)
-    dim, data_dens, data_n_CRe, data_n_th, data_magx, data_magy, data_magz = loadData(path_input)    
-    
+    dim, data_dens, data_n_th, data_n_CRe, data_magx, data_magy, data_magz = loadData(path_input)
+        
     max_level=int(np.log2(dim))
     nr_of_cells =int(8**max_level)
     
@@ -255,16 +258,16 @@ if __name__ == "__main__":
                 c_y = iy-pos_min+pos_off
                 c_z = iz-pos_min+pos_off
                 
-                dens = data_dens[iy,ix,iz]#[ix,iy,iz]
+                dens = data_dens[ix,iy,iz]
                 
-                #Tgas=data_temp[iz,iy,ix]
+                #Tgas=data_temp[ix,iy,iz]
                 
-                magx = data_magx[iy,ix,iz]#[ix,iy,iz]
-                magy = data_magy[iy,ix,iz]#[ix,iy,iz]
-                magz = data_magz[iy,ix,iz]#[ix,iy,iz]
+                magx = data_magx[ix,iy,iz]
+                magy = data_magy[ix,iy,iz]
+                magz = data_magz[ix,iy,iz]
                 
-                n_th = data_n_th[iy,ix,iz]#[ix,iy,iz]
-                n_CR = data_n_CRe[iy,ix,iz]#[ix,iy,iz]
+                n_th = data_n_th[ix,iy,iz]
+                n_CR = data_n_CRe[ix,iy,iz]
                 
                 g_min = 2
                 g_max = 1000

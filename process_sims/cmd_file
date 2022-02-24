@@ -1,0 +1,25 @@
+<task> 1
+  <cmd>	CMD_SYNCHROTRON	
+  
+ <max_subpixel_lvl> 0
+     <path_grid>      "../../m12i_cr700/snapshot_600.0.hdf5_cut32_r10.dat"
+ <path_out>       "./results/./results/m12i_cr700_cut32_r10/"
+ #convesion into SI
+  <conv_dens>     1e6 #cm^-3 in m^-3	
+ <mu>		      1.4
+ # 1pc = 3.0857e+16 m
+ # this is half the side length so r * 1000* 3.0857e+16
+ <conv_len>      3.085700e+20 # the code assumes this is +- the side length of XX kpc
+ <conv_mag>      1e-4 # G in T
+ <nr_threads>  -1
+  #rotation axis 100 is x axis, 001 is z axis, 010 is y axis (manual has typo)
+ <axis1> 1 0 0
+  <axis2> 0 0 1
+ #detectors at lambda m rotated arround each of the ax1 and ax2  axis
+ # detector number of pixels lamda_min lambda_max number_of_wavelenghts no_bgr_source=1 angle_axis1 angle_axis2
+ # for healpix last 3 are: r_x, r_y, r_z in meters
+ <detector_sync nr_pixel = "32">	29.9	29.9	1	1	0.0	0.0	3.085700e+21
+ <detector_sync nr_pixel = "32">	29.9	29.9	1	1	0.0	90.0	3.085700e+21
+ <detector_sync nr_pixel = "32">	29.9	29.9	1	1	90.0	0.0	3.085700e+21
+ <detector_sync nr_pixel = "32">	29.9	29.9	1	1	90.0	90.0	3.085700e+21
+</task>

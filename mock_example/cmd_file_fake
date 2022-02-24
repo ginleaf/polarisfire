@@ -3,8 +3,8 @@
 
   <max_subpixel_lvl> 0
 
-  <path_grid>      "cut_fake_16.dat"
-  <path_out>       "./results/fake_16/"
+  <path_grid>      "mock_cube_yt.dat"
+  <path_out>       "./results/mock_yt_32/"
   
   #plot the input grid as fits as a sanity ckeck
   #<write_inp_midplanes> 16
@@ -29,8 +29,8 @@
   #detectors at 6 cm rotated arround each of the ax1 and ax2  axis
   # detector number of pixels lamda_min lambda_max number_of_wavelenghts no_bgr_source=1 angle_axis1 angle_axis2
  # for healpix last 3 are: r_x, r_y, r_z in meters
-  <detector_sync nr_pixel = "16">	29.9	29.9	1	1	0.0	0.0	6.0e+22
-  <detector_sync nr_pixel = "16">	29.9	29.9	1	1	0.0	90.0	6.0e+22
-  <detector_sync nr_pixel = "16">	29.9	29.9	1	1	90.0	0.0	6.0e+22
-  <detector_sync nr_pixel = "16">	29.9	29.9	1	1	90.0	90.0	6.0e+22
+  <detector_sync nr_pixel = "32">	29.9	29.9	1	1	0.0	0.0	6.0e+22
+  <detector_sync nr_pixel = "32">	29.9	29.9	1	1	0.0	90.0	6.0e+22
+  <detector_sync nr_pixel = "32">	29.9	29.9	1	1	90.0	0.0	6.0e+22
+  <detector_sync nr_pixel = "32">	29.9	29.9	1	1	90.0	90.0	6.0e+22
 </task> 

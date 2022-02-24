@@ -1,3 +1,13 @@
 Collection of scripts to run POLARIS on FIRE simulations
 
 1. mock_example/: example code to make a grid with constant B field and CR density for testing purposes
+        note: octree converter script slightly different than that in process_sims since we don't need to recompute n_cr
+
+2. process_sims/: scripts to preprocess simulation snapshots and run polaris
+		convert_FIRE_cubes_Suoqing_newyt.py: holds functions to read Gizmo output and write to grid format
+						           user can select to zoom within a specified radius and the resulting number of pixels
+		cube_gen.py: creates a gridded cube (hdf5) using the functions in convert_FIRE_cubes_Suoqing_newyt.py
+        cube_gen.sbatch: batch script to run on wheeler - sends email when done (change email address in script for this)
+        converter_octree_snapshot.py: converts hdf5 grid file to octree format for input to Polaris        
+        run_polaris.py: python wrapper that creates command file for Polaris and runs Polaris
+        plot_data.py: example script to plot fits file outputs of polaris

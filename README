@@ -11,3 +11,11 @@ Collection of scripts to run POLARIS on FIRE simulations
         converter_octree_snapshot.py: converts hdf5 grid file to octree format for input to Polaris        
         run_polaris.py: python wrapper that creates command file for Polaris and runs Polaris
         plot_data.py: example script to plot fits file outputs of polaris
+
+Run scripts in this order:
+
+1) python3.7 cube_gen.py (or the corresponding batch script) to make a gridded cube
+2) python3.7 converter_octree_snapshot.py to convert that cube to octree
+3) python3.7 run_polaris.py to run Polaris 
+Then you may copy the output fits files (usually in results/.../data/) to local pc
+and plot output with plot_data.py

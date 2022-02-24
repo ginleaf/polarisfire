@@ -28,18 +28,16 @@ def write_cmd(cmd_savename, octree_filename, results_dir, r,Npix):
     fop.close()
     return
 
-Npix = 32 # the number of pixels of any axis of the cube
-r = 10 # the radius (half sidelength) of the cube in kpc
+Npix = 256 # the number of pixels of any axis of the cube
+r = 30 # the radius (half sidelength) of the cube in kpc
 
 cmd_savename = 'cmd_file'
 octree_filename = "../../m12i_cr700/snapshot_600.0.hdf5_cut{:d}_r{:d}.dat".format(Npix,r)
-results_dir = "./results/m12i_cr700_cut{:d}_r{:d}/".format(Npix,r)
+results_dir = "./m12i_cr700_cut{:d}_r{:d}/".format(Npix,r)
 
 # Edit cmd file
 write_cmd(cmd_savename, octree_filename, results_dir, r,Npix)
 
-# copy cmd file to results directory
-shutil.copyfile(cmd_savename, results_dir+cmd_savename)
 
 # Call polaris
 PATH_TO_POLARIS = '/home/panopg/Polaris/bin/polaris'
@@ -57,3 +55,6 @@ def run_command(command):
 command = [PATH_TO_POLARIS,cmd_savename]
 for line in run_command(command):
     print(line)
+
+# copy cmd file to results directory
+shutil.copyfile(cmd_savename, './results/'+results_dir+cmd_savename)

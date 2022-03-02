@@ -31,7 +31,7 @@ def loadData(path):
     n_th = dens*electron_abundance
 
     # Load CR energy
-    CR_spec_energy = f['CosmicRayEnergy'][:] # this is specific energy (erg/g) 
+    CR_spec_energy = f['CosmicRayEnergy_spec'][:] # this is specific energy (erg/g) 
     GeV_to_erg = 1.602e-19 * 10**7 * 10**9 # erg - these are 1 GeV protons
     CR_energy_density = CR_spec_energy*massdens # erg/cm^3
     # CR proton volume density

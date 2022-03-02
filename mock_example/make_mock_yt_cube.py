@@ -26,7 +26,7 @@ def make_mock(fn,savename,params,fields=None):
         and two zero density planes. For testing purposes.
     '''
     
-    CRdens, Bx, By, Bz = params
+    radius, CRdens, Bx, By, Bz = params
     
     # Read the hdf5 file you wish to modify
     f = h5py.File(fn, "r")
@@ -37,7 +37,7 @@ def make_mock(fn,savename,params,fields=None):
         print('Fields: ',fields)
 
     try:
-        f_new.create_dataset("radius", [1], data=f['radius'], dtype="float64")
+        f_new.create_dataset("radius", [1], data=radius, dtype="float64")
         f_new.create_dataset("current_redshift", [1], data=f['current_redshift'], dtype="float64")
         f_new.create_dataset("current_time", [1], data=f['current_time'], dtype="float64")
     
@@ -215,9 +215,9 @@ Bz = By/10.
 CRdens = 1e-5 # cm^{-3}
 p_to_e_ratio = 1#50./1
 
-params = [CRdens,Bx,By,Bz]
+params = [radius,CRdens,Bx,By,Bz]
 
-fn = '/home/panopg/m12i_cr700/snapshot_600.0.hdf5_cut%d_r%d.hdf5'%(Npix,radius)
+fn = '/home/panopg/m12i_cr700/snapshot_600.0.hdf5_cut%d_r30.hdf5'%(Npix)
 
 
 # Modify the cube to have constant B, ncr
@@ -294,7 +294,7 @@ if PLOT: # This is for checking the outputs
 #%%
     
 # Write
-
+'''
 f_new = h5py.File(savename,'w')
 
 radius = ds.quan(radius, 'kpc').value
@@ -329,7 +329,7 @@ for ii,field in enumerate(ds.field_list):
     
 f_new.close()
     
-    
+'''
 #%%
 
 ##### The rest is junk code, keeping in case I need snippets down the line #######

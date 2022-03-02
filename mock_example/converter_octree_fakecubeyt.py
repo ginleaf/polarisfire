@@ -268,8 +268,8 @@ if __name__ == "__main__":
                 n_th = data_n_th[ix,iy,iz]
                 n_CR = data_n_CRe[ix,iy,iz]
                 
-                g_min = 2
-                g_max = 1000
+                g_min = 10
+                g_max = 100000
                 syn_p = 3
 
                 cell = cell_oct(c_x, c_y, c_z, 0, max_level)

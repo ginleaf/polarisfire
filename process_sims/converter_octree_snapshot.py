@@ -5,8 +5,8 @@ import h5py
 import os
 #%%
 
-path_input = "../../m12i_cr700/snapshot_600.0.hdf5_cut32_r10.hdf5"
-path_output = "../../m12i_cr700/snapshot_600.0.hdf5_cut32_r10.dat"
+path_input = "../../m12i_cr700/snapshot_600.0.hdf5_cut256_r30.hdf5"
+path_output = "../../m12i_cr700/snapshot_600.0.hdf5_cut256_r30.dat"
 
 # data IDs for the POLARIS header
 grid_id = 20  # grid ID (20 = octree)  
@@ -33,7 +33,7 @@ def loadData(path):
     # Load CR energy
     CR_spec_energy = f['CosmicRayEnergy'][:] # this is specific energy (erg/g) 
     GeV_to_erg = 1.602e-19 * 10**7 * 10**9 # erg - these are 1 GeV protons
-    CR_energy_density = CR_spec_energy*massdens # erg/cm^-3
+    CR_energy_density = CR_spec_energy*massdens # erg/cm^3
     # CR proton volume density
     n_CRp = CR_energy_density/GeV_to_erg #", units="erg/cm**3", sampling_type="cell")
     # Compute CR electrons
@@ -268,8 +268,8 @@ if __name__ == "__main__":
                 n_th = data_n_th[ix,iy,iz]
                 n_CR = data_n_CRe[ix,iy,iz]
                 
-                g_min = 2
-                g_max = 1000
+                g_min = 10
+                g_max = 100000
                 syn_p = 3
 
                 cell = cell_oct(c_x, c_y, c_z, 0, max_level)

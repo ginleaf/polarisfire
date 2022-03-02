@@ -217,7 +217,7 @@ p_to_e_ratio = 1#50./1
 
 params = [radius,CRdens,Bx,By,Bz]
 
-fn = '/home/panopg/m12i_cr700/snapshot_600.0.hdf5_cut%d_r30.hdf5'%(Npix)
+fn = '/home/panopg/m12i_cr700/snapshot_600.0.hdf5_cut%d_r10.hdf5'%(Npix)
 
 
 # Modify the cube to have constant B, ncr

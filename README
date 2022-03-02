@@ -1,6 +1,7 @@
 Collection of scripts to run POLARIS on FIRE simulations for calculating synchrotron emission
 
 1. mock_example/: example code to make a grid with constant B field and CR density for testing purposes
+        use make_mock_yt_cube.py to read in a simulation snapshot and modify its contents to have the desired values of B, ncr etc
         note: octree converter script slightly different than that in process_sims since we don't need to recompute n_cr
 
 2. process_sims/: scripts to preprocess simulation snapshots and run polaris

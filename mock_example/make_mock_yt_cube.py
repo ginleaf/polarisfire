@@ -15,11 +15,8 @@ import sys
 
 from unyt import eV,erg
 
-sys.path.append('/home/gin/projects/FIRE/')
+os.chdir('/home/panopg/polarisfire/mock_example/')
 
-os.chdir('/home/gin/projects/FIRE/POLARIS/polarisfire/mock_example/')
-
-from convert_FIRE_cubes_Suoqing_newyt import write_grid
 #%%
 
 def make_mock(fn,savename,params,fields=None):
@@ -201,28 +198,26 @@ def load_grid_and_compute_nCR_ne(fn, fields=None, exclude_fields=[], interval=1,
 #%%
     
 ## INPUT parameters ########
-    
+# Choosing input parameters to coincide with Reissl et al  2019 properties in midplane of galaxy
+# so we can compare output units
+        
 savename = 'mock_cube_yt.hdf5'
 
-Npix = 32
-radius = 10
+PLOT = False
 
-By = 1e-6 #G
+Npix = 32
+radius = 8.144# kpc
+
+By = 10e-6 #G
 Bx = 0
 Bz = By/10.
 
-CRdens = 1e-10
-p_to_e_ratio = 50./1
+CRdens = 1e-5 # cm^{-3}
+p_to_e_ratio = 1#50./1
 
 params = [CRdens,Bx,By,Bz]
 
-fn = 'snapshot_600.0.hdf5_cut%d_r%d.hdf5'%(Npix,radius)
-
-ds = load_grid_and_compute_nCR_ne(fn, p_to_e_ratio = p_to_e_ratio)
-
-ds.field_list
-
-#%%
+fn = '/home/panopg/m12i_cr700/snapshot_600.0.hdf5_cut%d_r%d.hdf5'%(Npix,radius)
 
 
 # Modify the cube to have constant B, ncr
@@ -230,61 +225,71 @@ print('Writing to file',savename)
 
 make_mock(fn,savename,params)
 
-print('Load the grid --------------------')
-ds_mock = load_grid_and_compute_nCR_ne(savename, p_to_e_ratio = p_to_e_ratio, compute_ncr=False)
- 
-ds_mock.field_list
+
+
 
 #%%
-## Check output with a slice plot
-
-slc = yt.SlicePlot(ds, "z", ("gas", "magnetic_field_x"), center=[0., 0., 0.],origin='native')
-slc.set_cmap(("gas", "magnetic_field_x"), "Blues")
-slc.annotate_grids(cmap=None)
-slc.save('Bx_slice.png')
-
-slc = yt.SlicePlot(ds, "z", ("gas", "magnetic_field_y"), center=[0., 0., 0.],origin='native')
-slc.set_cmap(("gas", "magnetic_field_y"), "Blues")
-slc.annotate_grids(cmap=None)
-slc.save('By_slice.png')
-
-slc = yt.SlicePlot(ds, "z", ("gas", "magnetic_field_z"), center=[0., 0., 0.],origin='native')
-slc.set_cmap(("gas", "magnetic_field_z"), "Blues")
-slc.annotate_grids(cmap=None)
-slc.save('Bz_slice.png')
-
-
-slc = yt.SlicePlot(ds, "z", ("gas", "CosmicRayEnergy"), center=[0., 0., 0.],origin='native')
-slc.set_cmap(("gas", "CosmicRayEnergy"), "Blues")
-slc.annotate_grids(cmap=None)
-slc.save('crenergy_slice.png')
-
-
-slc = yt.SlicePlot(ds, "z", ("gas", "El_number_density"), center=[0., 0., 0.],origin='native')
-slc.set_cmap(("gas", "El_number_density"), "Blues")
-slc.annotate_grids(cmap=None)
-slc.save('ne_slice.png')
-
-#%%
-# Make lots of slice plots every 1 kpc (1 pixel)
-for i in np.arange(-10,10):
+if PLOT: # This is for checking the outputs
     
-    print(i)
+    print('Load the grid --------------------')
+
+    ds = load_grid_and_compute_nCR_ne(fn, p_to_e_ratio = p_to_e_ratio)
     
-    slc = yt.SlicePlot(ds_mock, "z", ("gas", "n_cre"), center=[0., 0., i],origin='native')
-    slc.set_cmap(("gas", "n_cre"), "Blues")
-    slc.annotate_grids(cmap=None)
-    slc.save('slices/ncre_z_slice%d.png'%i)
+    ds.field_list
+    
+    
+    ds_mock = load_grid_and_compute_nCR_ne(savename, p_to_e_ratio = p_to_e_ratio, compute_ncr=False)
+     
+    ds_mock.field_list
 
-    slc = yt.SlicePlot(ds_mock, "y", ("gas", "n_cre"), center=[0., 0., i],origin='native')
-    slc.set_cmap(("gas", "n_cre"), "Blues")
+    ## Check output with a slice plot
+    
+    slc = yt.SlicePlot(ds, "z", ("gas", "magnetic_field_x"), center=[0., 0., 0.],origin='native')
+    slc.set_cmap(("gas", "magnetic_field_x"), "Blues")
     slc.annotate_grids(cmap=None)
-    slc.save('slices/ncre_y_slice%d.png'%i)
+    slc.save('Bx_slice.png')
+    
+    slc = yt.SlicePlot(ds, "z", ("gas", "magnetic_field_y"), center=[0., 0., 0.],origin='native')
+    slc.set_cmap(("gas", "magnetic_field_y"), "Blues")
+    slc.annotate_grids(cmap=None)
+    slc.save('By_slice.png')
+    
+    slc = yt.SlicePlot(ds, "z", ("gas", "magnetic_field_z"), center=[0., 0., 0.],origin='native')
+    slc.set_cmap(("gas", "magnetic_field_z"), "Blues")
+    slc.annotate_grids(cmap=None)
+    slc.save('Bz_slice.png')
+    
+    
+    slc = yt.SlicePlot(ds, "z", ("gas", "CosmicRayEnergy"), center=[0., 0., 0.],origin='native')
+    slc.set_cmap(("gas", "CosmicRayEnergy"), "Blues")
+    slc.annotate_grids(cmap=None)
+    slc.save('crenergy_slice.png')
+    
+    
+    slc = yt.SlicePlot(ds, "z", ("gas", "El_number_density"), center=[0., 0., 0.],origin='native')
+    slc.set_cmap(("gas", "El_number_density"), "Blues")
+    slc.annotate_grids(cmap=None)
+    slc.save('ne_slice.png')
 
-    slc = yt.SlicePlot(ds_mock, "x", ("gas", "n_cre"), center=[0., 0., i],origin='native')
-    slc.set_cmap(("gas", "n_cre"), "Blues")
-    slc.annotate_grids(cmap=None)
-    slc.save('slices/ncre_x_slice%d.png'%i)
+    # Make lots of slice plots every 1 kpc (1 pixel)
+    for i in np.arange(-10,10):
+        
+        print(i)
+        
+        slc = yt.SlicePlot(ds_mock, "z", ("gas", "n_cre"), center=[0., 0., i],origin='native')
+        slc.set_cmap(("gas", "n_cre"), "Blues")
+        slc.annotate_grids(cmap=None)
+        slc.save('slices/ncre_z_slice%d.png'%i)
+    
+        slc = yt.SlicePlot(ds_mock, "y", ("gas", "n_cre"), center=[0., 0., i],origin='native')
+        slc.set_cmap(("gas", "n_cre"), "Blues")
+        slc.annotate_grids(cmap=None)
+        slc.save('slices/ncre_y_slice%d.png'%i)
+    
+        slc = yt.SlicePlot(ds_mock, "x", ("gas", "n_cre"), center=[0., 0., i],origin='native')
+        slc.set_cmap(("gas", "n_cre"), "Blues")
+        slc.annotate_grids(cmap=None)
+        slc.save('slices/ncre_x_slice%d.png'%i)
     
 #%%
     
@@ -327,7 +332,7 @@ f_new.close()
     
 #%%
 
-
+##### The rest is junk code, keeping in case I need snippets down the line #######
 
 
 #%%

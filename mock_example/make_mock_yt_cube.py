@@ -208,11 +208,11 @@ PLOT = False
 Npix = 32
 radius = 8.144# kpc
 
-By = 10e-6 #G
+By = 30e-6 #G
 Bx = 0
 Bz = By/10.
 
-CRdens = 1e-5 # cm^{-3}
+CRdens = 1e-4 # cm^{-3}
 p_to_e_ratio = 1#50./1
 
 params = [radius,CRdens,Bx,By,Bz]

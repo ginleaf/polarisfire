@@ -38,7 +38,7 @@ def loadData(path):
     CR_energy_density = CR_spec_energy*massdens # erg/cm^3
     eV_to_erg = 1.602e-19 * 10**7
     # CR electron volume density
-    CR_energydens_eV = CR_energydens/eV_to_erg # convert to eV/cm^3
+    CR_energydens_eV = CR_energy_density/eV_to_erg # convert to eV/cm^3
     # CR electron number density, assuming LISM spectrum
     n_CRe = CR_energydens_eV/0.04/10**5
 

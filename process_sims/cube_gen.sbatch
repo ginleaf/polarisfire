@@ -6,5 +6,5 @@
 #SBATCH --mail-user=panopg@caltech.edu
 #SBATCH -t 24:00:00
 
-python cube_gen.py
+python3.7 cube_gen.py
 

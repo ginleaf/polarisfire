@@ -1,4 +1,4 @@
 Total time:
-0h 0min 17sec
+0h 0min 1sec
 
-17 ms
+1 ms

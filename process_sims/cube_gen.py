@@ -2,14 +2,14 @@ import numpy as np
 import yt
 from convert_FIRE_cubes_Suoqing_newyt import write_grid
 
-field_names = [('PartType0','CosmicRayEnergy'),
-	      ('PartType0','H_nuclei_density'),
-              ('PartType0', 'ElectronAbundance'),
-	      ('PartType0', 'Density'), 
-             ('PartType0', 'InternalEnergy'),
-	     ('gas','magnetic_field_x'),
-             ('gas', 'magnetic_field_y'),
-	    ('gas', 'magnetic_field_z')]
+field_names = [('PartType0','CosmicRayEnergy_spec'),
+	        ('PartType0','H_nuclei_density'),
+            ('PartType0', 'ElectronAbundance'),
+	        ('PartType0', 'Density'), 
+            ('PartType0', 'InternalEnergy'),
+	        ('gas','magnetic_field_x'),
+            ('gas', 'magnetic_field_y'),
+	        ('gas', 'magnetic_field_z')]
 
 write_grid('/home/panopg/m12i_cr700/snapshot_600.0.hdf5',60,field_names,dims=[256,256,256])
 #/panfs/ds09/hopkins/panopg/snapshots/m12i/cr_700/snapshot_600.0.hdf5',10,field_names,dims=[64,64,64])

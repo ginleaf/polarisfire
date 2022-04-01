@@ -55,8 +55,8 @@ def write_grid(fn, radius, fields, dims=[256,256,256], overwrite=True):
         field_name is a tuple like ('PartType0','Density'), 
         which means the gas density (particle type 0 means gas, 4 means stars, see Gizmo user guide)
         '''
-        if field_name[1] == "CosmicRayEnergy":
-            print('if CR')
+        if field_name[1] == "CosmicRayEnergy_spec":
+
             if not ('PartType0', 'CosmicRayEnergy') in ds.field_list: raise ValueError("No CosmicRayEnergy, skip")
 
             ds.add_field(('PartType0','CosmicRayEnergy_spec'),
@@ -142,6 +142,7 @@ def write_grid(fn, radius, fields, dims=[256,256,256], overwrite=True):
                 field_name = field
 
                 print('Getting field ', field_name)
+
                 
                 field_data = get_field_data(field_name, grid)
 

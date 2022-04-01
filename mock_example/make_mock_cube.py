@@ -17,10 +17,10 @@ from astropy.io import fits
 
 # Make test hdf5 file
 
-Npix = 16
+Npix = 32
 
-NCR_in = 1e-11 # CR volume density in cm^-3
-B_in = 1e-6 # B in Gauss
+NCR_in = 1e-5 # CR volume density in cm^-3
+B_in = 10 # B in Gauss
 
 
 

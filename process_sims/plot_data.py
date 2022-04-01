@@ -16,7 +16,7 @@ from astropy.io import fits
 #%%
 
 # Plot polaris output
-savedir = '/home/gin/projects/FIRE/POLARIS/polarisfire/preprocess_sims/results/'
+savedir = '/home/gin/projects/FIRE/POLARIS/polarisfire/process_sims/results/m12i_cr700_cut256_r30/'
 folder = savedir+'data/'
 
 os.chdir(folder)

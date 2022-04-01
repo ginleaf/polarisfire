@@ -15,7 +15,7 @@
   <mu>		      1.4		
   
   #assuming the side length of the cube is pm 1pc  6.171e+16
-  <conv_len>      1.5e+20 # the code assumes this is half the side length of 32 kpc
+  <conv_len>      1.25649704e+20 # the code assumes this is half the side length of 8.14 kpc
   <conv_mag>      1e-4 # G in T
   #<conv_vel>      0.01
   #<mass_fraction> 0.01
@@ -29,8 +29,9 @@
   #detectors at 6 cm rotated arround each of the ax1 and ax2  axis
   # detector number of pixels lamda_min lambda_max number_of_wavelenghts no_bgr_source=1 angle_axis1 angle_axis2
  # for healpix last 3 are: r_x, r_y, r_z in meters
-  <detector_sync nr_pixel = "32">	29.9	29.9	1	1	0.0	0.0	6.0e+22
-  <detector_sync nr_pixel = "32">	29.9	29.9	1	1	0.0	90.0	6.0e+22
-  <detector_sync nr_pixel = "32">	29.9	29.9	1	1	90.0	0.0	6.0e+22
-  <detector_sync nr_pixel = "32">	29.9	29.9	1	1	90.0	90.0	6.0e+22
+  <detector_sync nr_pixel = "32">	0.062	0.062	1	1	0.0	0.0	1.08e+23
+  #<detector_sync nr_pixel = "32">	29.9	29.9	1	1	0.0	90.0	6.0e+22
+  #<detector_sync nr_pixel = "32">	29.9	29.9	1	1	90.0	0.0	6.0e+22
+  #<detector_sync nr_pixel = "32">	29.9	29.9	1	1	90.0	90.0	6.0e+22
+  #<detector_sync_healpix nr_sides = "64"> 29.9	29.9	1	1	0	0	0
 </task> 

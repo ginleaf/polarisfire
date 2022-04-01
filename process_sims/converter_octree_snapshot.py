@@ -30,16 +30,26 @@ def loadData(path):
     # Compute thermal electron volume density
     n_th = dens*electron_abundance
 
-    # Load CR energy
-    CR_spec_energy = f['CosmicRayEnergy_spec'][:] # this is specific energy (erg/g) 
-    GeV_to_erg = 1.602e-19 * 10**7 * 10**9 # erg - these are 1 GeV protons
+    # Compute total number density of CR electrons assuming a LISM spectrum
+    # where proton energy density of 1 eV/cm^3 corresponds to 0.04 eV/cm^3 electron energy density
+    # and this gives 10^-5 cm^-3 number density after integrating ... (details needed here)
+    # Load CR specific energy 
+    CR_spec_energy = f['CosmicRayEnergy_spec'][:] # this is specific energy (erg/g)
     CR_energy_density = CR_spec_energy*massdens # erg/cm^3
+    eV_to_erg = 1.602e-19 * 10**7
+    # CR electron volume density
+    CR_energydens_eV = CR_energydens/eV_to_erg # convert to eV/cm^3
+    # CR electron number density, assuming LISM spectrum
+    n_CRe = CR_energydens_eV/0.04/10**5
+
+    # Uncomment if you are only interested in number density of 1 GeV electrons
+    #GeV_to_erg = 1.602e-19 * 10**7 * 10**9 # erg - these are 1 GeV protons
     # CR proton volume density
-    n_CRp = CR_energy_density/GeV_to_erg #", units="erg/cm**3", sampling_type="cell")
+    #n_CRp = CR_energy_density/GeV_to_erg #", units="erg/cm**3", sampling_type="cell")
     # Compute CR electrons
     # assume proton-to-electron ratio    
-    p_to_e_ratio = 50./1
-    n_CRe = n_CRp/p_to_e_ratio
+    #p_to_e_ratio = 50./1
+    #n_CRe = n_CRp/p_to_e_ratio
     
     #n_CRe = f['n_cre'][:]
     f.close()

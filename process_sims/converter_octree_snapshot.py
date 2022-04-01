@@ -5,8 +5,8 @@ import h5py
 import os
 #%%
 
-path_input = "../../m12i_cr700/snapshot_600.0.hdf5_cut256_r30.hdf5"
-path_output = "../../m12i_cr700/snapshot_600.0.hdf5_cut256_r30.dat"
+path_input = "../../m12i_cr700/snapshot_600.0.hdf5_cut256_r60.hdf5"
+path_output = "../../m12i_cr700/snapshot_600.0.hdf5_cut256_r60.dat"
 
 # data IDs for the POLARIS header
 grid_id = 20  # grid ID (20 = octree)  

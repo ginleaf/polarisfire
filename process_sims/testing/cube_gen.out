@@ -1,0 +1,14 @@
+Requested fields: [('PartType0', 'CosmicRayEnergy'), ('PartType0', 'H_nuclei_density'), ('PartType0', 'ElectronAbundance'), ('PartType0', 'Density'), ('PartType0', 'InternalEnergy'), ('gas', 'magnetic_field_x'), ('gas', 'magnetic_field_y'), ('gas', 'magnetic_field_z')]
+Traceback (most recent call last):
+  File "cube_gen.py", line 14, in <module>
+    write_grid('/panfs/ds09/hopkins/panopg/snapshots/m12i/cr_700/snapshot_600.0.hdf5',10,field_names,dims=[64,64,64])
+  File "/home/panopg/polarisfire/preprocess_sims/convert_FIRE_cubes.py", line 35, in write_grid
+    f_orig = h5py.File(fn,'r')
+  File "/home/panopg/.local/lib/python3.7/site-packages/h5py/_hl/files.py", line 458, in __init__
+    swmr=swmr)
+  File "/home/panopg/.local/lib/python3.7/site-packages/h5py/_hl/files.py", line 199, in make_fid
+    fid = h5f.open(name, flags, fapl=fapl)
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5f.pyx", line 100, in h5py.h5f.open
+FileNotFoundError: [Errno 2] Unable to open file (unable to open file: name = '/panfs/ds09/hopkins/panopg/snapshots/m12i/cr_700/snapshot_600.0.hdf5', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0)

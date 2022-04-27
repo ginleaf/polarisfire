@@ -5,8 +5,8 @@ import h5py
 import os
 #%%
 
-path_input = "../../m12i_cr700/snapshot_600.0.hdf5_cut256_r60.hdf5"
-path_output = "../../m12i_cr700/snapshot_600.0.hdf5_cut256_r60.dat"
+path_input = "/panfs/ds09/hopkins/panopg/m12i_cr700/snapshot_600.0.hdf5_cut256_r30_mock_smooth_disk2.hdf5"
+path_output = "/panfs/ds09/hopkins/panopg/m12i_cr700/snapshot_600.0.hdf5_cut256_r30_mock_smooth_disk2.dat"
 
 # data IDs for the POLARIS header
 grid_id = 20  # grid ID (20 = octree)  
@@ -278,8 +278,8 @@ if __name__ == "__main__":
                 n_th = data_n_th[ix,iy,iz]
                 n_CR = data_n_CRe[ix,iy,iz]
                 
-                g_min = 10
-                g_max = 100000
+                g_min = 4
+                g_max = 300
                 syn_p = 3
 
                 cell = cell_oct(c_x, c_y, c_z, 0, max_level)

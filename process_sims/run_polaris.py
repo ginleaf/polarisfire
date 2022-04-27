@@ -101,4 +101,6 @@ for line in run_command(command):
     print(line)
 
 # copy cmd file to results directory
+if not os.isdir('./results/'+results_dir):
+    os.mkdir('./results/'+results_dir)
 shutil.copyfile(cmd_savename, './results/'+results_dir+cmd_savename)

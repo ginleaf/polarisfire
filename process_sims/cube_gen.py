@@ -11,7 +11,7 @@ field_names = [('PartType0','CosmicRayEnergy_spec'),
             ('gas', 'magnetic_field_y'),
 	        ('gas', 'magnetic_field_z')]
 
-write_grid('/home/panopg/m12i_cr700/snapshot_600.0.hdf5',60,field_names,dims=[256,256,256])
+write_grid('/home/panopg/m12i_cr700/snapshot_600.0.hdf5',30,field_names,dims=[256,256,256])
 #/panfs/ds09/hopkins/panopg/snapshots/m12i/cr_700/snapshot_600.0.hdf5',10,field_names,dims=[64,64,64])
 
 #hopkins/phopkins/data1/GalaxiesOnFire/m11q_res880/output/snapdir_600/snapshot_600.0.hdf5',100,field_names,dims=[256,256,256])

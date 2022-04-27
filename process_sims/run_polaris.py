@@ -29,24 +29,25 @@ def write_cmd(cmd_savename, octree_filename, results_dir, r,Npix,observer_loc,ex
     #fop.write(' <detector_sync nr_pixel = "{:d}">	29.9	29.9	1	1	90.0	90.0	{:e}\n'.format(Npix,side_length_kpc*10))
     fop.write(' <detector_sync nr_pixel = "{:d}">	0.05	0.05	1	1	0.0	0.0	{:e}\n'.format(Npix,external_obs_distance_m))
     fop.write(' <detector_sync nr_pixel = "{:d}">	0.05	0.05	1	1	0.0	90.0	{:e}\n'.format(Npix,external_obs_distance_m))
-    #fop.write('<detector_sync_healpix nr_sides = "64"> 29.9	29.9	1	1	{:e}	{:e}	{:e}\n'.format(xobs,yobs,zobs))
-    #fop.write('<detector_sync_healpix nr_sides = "64"> 0.738	0.738	1	1	{:e}	{:e}	{:e}\n'.format(xobs,yobs,zobs))    
+    fop.write('<detector_sync_healpix nr_sides = "64"> 29.9	29.9	1	1	{:e}	{:e}	{:e}\n'.format(xobs,yobs,zobs))
+    fop.write('<detector_sync_healpix nr_sides = "64"> 0.738	0.738	1	1	{:e}	{:e}	{:e}\n'.format(xobs,yobs,zobs))    
     fop.write('</task>\n')
     fop.close()
     return
 
-Npix = 512 # the number of pixels of any axis of the cube
+Npix = 256 # the number of pixels of any axis of the cube
 r = 30 # the radius (half sidelength) of the cube in kpc
 
-x,y,z = -2.748202E+20, -1.30178E+20, 1.446422E+19#90,110,130
+x,y,z = 3.0857e15,0,0#-2.748202E+20, -1.30178E+20, 1.446422E+19#90,110,130
 
 observer_loc_units = 'm'#'pixels'
 
 ext_observer_distance = 3.5e3 #kpc
 
 cmd_savename = 'cmd_file'
-octree_filename = "/home/sponnada/octrees_2_25/octree_r30_x512_512_z512.dat"#"../../m12i_cr700/snapshot_600.0.hdf5_cut{:d}_r{:d}.dat".format(Npix,r)
-results_dir = "./m12i_cr700_cut{:d}_r{:d}/".format(Npix,r)
+octree_filename = "/panfs/ds09/hopkins/panopg/m12i_cr700/snapshot_600.0.hdf5_cut{:d}_r{:d}_mock_smooth_disk2.dat".format(Npix,r)
+#"/home/sponnada/octrees_2_25/octree_r30_x512_512_z512.dat"
+results_dir = "./smooth_disk2/"
 
 if observer_loc_units == 'pixels':
     # Observer location in pixels from corner of cube

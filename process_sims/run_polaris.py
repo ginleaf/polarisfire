@@ -83,7 +83,7 @@ write_cmd(cmd_savename, octree_filename, results_dir, r,Npix,observer_loc,ext_ob
 
 
 # Call polaris
-PATH_TO_POLARIS = '/home/panopg/Polaris/bin/polaris'
+PATH_TO_POLARIS = '$POLARISPATH'+'/bin/polaris'
 
 #subprocess.call(['sh',PATH_TO_POLARIS+' '+cmd_savename])
 #output_stream = os.popen(PATH_TO_POLARIS+' '+cmd_savename)

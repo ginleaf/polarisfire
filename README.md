@@ -5,10 +5,10 @@ Collection of scripts to run POLARIS on FIRE simulations for calculating synchro
 ## Setup:
 Make sure you install polaris https://portia.astrophysik.uni-kiel.de/polaris/ 
 
-Simply add polaris and polarisfire to your $PYTHONPATH:
-*    `echo "export POLARISPATH=/path/to/polaris" >> ~./bashrc`
-*    `echo "export POLARISFIREPATH=/path/to/polarisfire" >> ~/.bashrc`
-*    `echo "export PYTHONPATH=$PYTHONPATH:$POLARISPATH:$POLARISFIREPATH" >> ~/.bashrc`
+Edit your `~/.bashrc` with the following lines at the end to add polaris and polarisfire to your $PYTHONPATH:
+*    `export POLARISPATH=/path/to/polaris" `
+*    `export POLARISFIREPATH=/path/to/polarisfire" `
+*    `export PYTHONPATH=$PYTHONPATH:$POLARISPATH:$POLARISFIREPATH" `
 
 Then run `bash` to refresh and update environment variables.
 

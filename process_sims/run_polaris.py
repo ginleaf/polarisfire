@@ -45,9 +45,9 @@ observer_loc_units = 'm'#'pixels'
 ext_observer_distance = 3.5e3 #kpc
 
 cmd_savename = 'cmd_file'
-octree_filename = "/panfs/ds09/hopkins/panopg/m12i_cr700/snapshot_600.0.hdf5_cut{:d}_r{:d}_mock_smooth_disk2.dat".format(Npix,r)
+octree_filename = "/panfs/ds09/hopkins/panopg/m12i_cr700/snapshot_600.0.hdf5_cut{:d}_r{:d}_mock_smooth_disk3.dat".format(Npix,r)
 #"/home/sponnada/octrees_2_25/octree_r30_x512_512_z512.dat"
-results_dir = "./smooth_disk2/"
+results_dir = "./smooth_disk3/"
 
 if observer_loc_units == 'pixels':
     # Observer location in pixels from corner of cube
@@ -93,7 +93,7 @@ PATH_TO_POLARIS = '$POLARISPATH'+'/bin/polaris'
 def run_command(command):
     p = subprocess.Popen(command,
                          stdout=subprocess.PIPE,
-                         stderr=subprocess.STDOUT)
+                         stderr=subprocess.STDOUT,shell=True)
     return iter(p.stdout.readline, b'')
 
 command = [PATH_TO_POLARIS,cmd_savename]

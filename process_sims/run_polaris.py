@@ -93,7 +93,7 @@ PATH_TO_POLARIS = os.environ['POLARISPATH']+'/bin/polaris'
 def run_command(command):
     p = subprocess.Popen(command,
                          stdout=subprocess.PIPE,
-                         stderr=subprocess.STDOUT,shell=True)
+                         stderr=subprocess.STDOUT)
     return iter(p.stdout.readline, b'')
 
 command = [PATH_TO_POLARIS,cmd_savename]
